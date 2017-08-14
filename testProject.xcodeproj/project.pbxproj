@@ -97,7 +97,7 @@
 					F53D635E1F413C0800FF1573 = {
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = W23HN34LQZ;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
@@ -261,9 +261,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = W23HN34LQZ;
 				INFOPLIST_FILE = testProject/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = DongJiaXun.testProject;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -281,6 +283,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEVELOPMENT_TEAM = W23HN34LQZ;
 				INFOPLIST_FILE = testProject/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = DongJiaXun.testProject;
 				PRODUCT_NAME = "$(TARGET_NAME)";
