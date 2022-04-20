@@ -26,4 +26,8 @@ jobs:
     - name: Send greeting
       uses: actions/github-script@v6
       with:
-          script: console.log(context)
+          script: |
+            const result = github.rest.pulls.list({
+              owner: context.repo.owner,
+              repo: context.repo.repo
+            })
