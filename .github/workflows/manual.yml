@@ -23,34 +23,18 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
     # Runs a single command using the runners shell
-    - name: Send greeting
-    - uses: actions/setup-node@v2
-      with:
-        node-version: 14
-    - run: npm install node-fetch@2
-    - uses: actions/github-script@v6
-      with:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 14
+      - run: npm ci
+      # or one-off:
+      - run: npm install execa
+      - uses: actions/github-script@v6
+        with:
           script: |
-            
-            github.paginate(github.rest.pulls.list, {
-              owner: context.repo.owner,
-              repo: context.repo.repo
-            }).then(pulls => {
-              console.log(pulls)
-            })
-            
-            const fetch = require('node-fetch')
-            
-            let data = {
-                username: "iOS",
-                icon_emoji: ":ios:",
-                text: "test\nabc",
-                channel: "#suin_channel"
-            }
-            fetch("https://hooks.slack.com/services/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", {
-              method: "POST",
-              headers: {'Content-Type': 'application/json'}, 
-              body: JSON.stringify(data)
-            }).then(res => {
-              console.log("Request complete! response:", res);
-            });
+            const execa = require('execa')
+
+            const { stdout } = await execa('echo', ['hello', 'world'])
+
+            console.log(stdout)
