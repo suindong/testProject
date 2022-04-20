@@ -40,6 +40,7 @@ jobs:
                 text: "test",
                 channel: "#suin_channel"
             }
+            console.log(JSON.stringify(data))
             fetch("https://hooks.slack.com/services/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", {
               method: "POST",
               headers: {'Content-Type': 'application/json'}, 
