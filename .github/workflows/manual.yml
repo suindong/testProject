@@ -25,7 +25,6 @@ jobs:
     # Runs a single command using the runners shell
     - name: Send greeting
     - uses: actions/github-script@v6
-    - uses: actions/setup-node@v2
       with:
           script: |
             github.paginate(github.rest.pulls.list, {
