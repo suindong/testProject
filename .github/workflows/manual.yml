@@ -44,7 +44,7 @@ jobs:
             
             fetch("https://hooks.slack.com/services/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", {
               method: "POST",
-              body: JSON.stringify(data),
+              body: JSON.parse(JSON.stringify(data)),
               headers: {'Content-Type': 'application/json'}
             }).then(res => {
               console.log("Request complete! response:", res);
