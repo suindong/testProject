@@ -37,7 +37,7 @@ jobs:
             let data = {
                 username: "iOS",
                 icon_emoji: ":ios:",
-                text: "test\nabc",
+                text: "test",
                 channel: "#suin_channel"
             }
             fetch("https://hooks.slack.com/services/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", {
