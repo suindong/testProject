@@ -34,3 +34,16 @@ jobs:
           script: |
             const fetch = require('node-fetch')
             console.log(fetch)
+            let data = {
+                username: "iOS",
+                icon_emoji: ":ios:",
+                text: "test\nabc",
+                channel: "#suin_channel"
+            }
+            fetch("https://hooks.slack.com/services/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", {
+              method: "POST",
+              headers: {'Content-Type': 'application/json'}, 
+              body: JSON.stringify(data)
+            }).then(res => {
+              console.log("Request complete! response:", res);
+            });
