@@ -45,7 +45,7 @@ jobs:
             let data = {
                 username: "iOS",
                 icon_emoji: ":ios:",
-                text: "test"
+                text: "tests"
             };
             console.log(JSON.stringify(data));
             
