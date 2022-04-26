@@ -40,14 +40,12 @@ jobs:
                       number
                       mergeable
                       milestone {
-                        
+
                       }
                       reviewRequests {
                         edges {
                           node {
                             requestedReviewer {
-                              user {
-                              }
                             }
                           }
                         }
