@@ -39,9 +39,22 @@ jobs:
                     node {
                       number
                       mergeable
-                      milestone
-                      reviewRequests
-                      reviews
+                      milestone {
+                        
+                      }
+                      reviewRequests {
+                        edges {
+                          node {
+                            requestedReviewer {
+                              user {
+                              }
+                            }
+                          }
+                        }
+                      }
+                      reviews {
+                        author
+                      }
                     }
                   }
                 }
