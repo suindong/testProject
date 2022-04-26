@@ -34,9 +34,15 @@ jobs:
           script: |
             const query = `query($owner:String!, $name:String!) {
               repository(owner:$owner, name:$name){
-                issues(first:100) {
-                  nodes {
-                    id
+                pullRequests(last: 10) {
+                  edges {
+                    node {
+                      number
+                      mergeable
+                      milestone
+                      reviewRequests
+                      reviews
+                    }
                   }
                 }
               }
