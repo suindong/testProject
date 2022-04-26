@@ -34,7 +34,7 @@ jobs:
           script: |
             const query = `query($owner:String!, $name:String!) {
               repository(owner:$owner, name:$name){
-                pullRequests(last: 100, states: OPEN) {
+                pullRequests(last: 100) {
                   edges {
                     node {
                       number
