@@ -57,6 +57,14 @@ jobs:
                         }
                       }
                     }
+                    reviews(last: 10) {
+                      nodes {
+                        state
+                        author {
+                          login
+                        }
+                      }
+                    }
                   }
                 }
               }
