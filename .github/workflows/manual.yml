@@ -32,6 +32,7 @@ jobs:
       - uses: actions/github-script@v6
         with:
           script: |
+            let milestone = context.payload.inputs.milestone
             const query = `query($owner:String!, $name:String!) {
               repository(owner:$owner, name:$name){
                 pullRequests(last: 100, states: [OPEN]) {
@@ -40,16 +41,19 @@ jobs:
                       author {
                         login
                       }
+                      isDraft
+                      permalink
                       number
                       mergeable
+                      milestone {
+                        title
+                      }
                       reviewRequests(last: 10) {
-                        edges {
-                          node {
-                            requestedReviewer {
-                              __typename
-                              ... on User {
-                                login
-                              }
+                        nodes {
+                          requestedReviewer {
+                            __typename
+                            ... on User {
+                              login
                             }
                           }
                         }
@@ -64,5 +68,25 @@ jobs:
               name: context.repo.repo
             }
             const result = await github.graphql(query, variables)
-            console.log(result.repository.pullRequests.edges)
-            console.log(result.repository.pullRequests.edges.length)
+
+            let text = ""
+            result.repository.pullRequests.nodes
+              .filter(function(pull) {
+                  return pull.milestone && pull.milestone.title == milestone && pull.isDraft == false
+              })
+              .forEach(function(pull) {
+                  let pullText = `\nPR: <${pull.permalink}|${pull.number}>`
+                  if (pull.reviewRequests.nodes.length > 0) {
+                      
+                      pullText += ", reviewer: "
+                  } else {
+                      pullText += ", reviewer: @app-ios"
+                  }
+                  pull.reviewRequests.nodes.forEach(function(r) {
+                      pullText += `${r.login} ,`;
+                  })
+                  text += pullText
+              })
+            
+            console.log(text)
+
