@@ -86,3 +86,4 @@ jobs:
                   text += pullText
               })
 
+            console.log(text)
