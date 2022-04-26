@@ -37,6 +37,7 @@ jobs:
                 pullRequests(last: 100, states: [OPEN]) {
                   edges {
                     node {
+                      author
                       number
                       mergeable
                     }
