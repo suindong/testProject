@@ -49,4 +49,5 @@ jobs:
               name: context.repo.repo
             }
             const result = await github.graphql(query, variables)
-            console.log(result)
+            console.log(result.repository.pullRequests.edges)
+            console.log(result.repository.pullRequests.edges.length)
