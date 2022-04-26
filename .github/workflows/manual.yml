@@ -46,7 +46,10 @@ jobs:
                         edges {
                           node {
                             requestedReviewer {
-                              login
+                              __typename
+                              ... on User {
+                                login
+                              }
                             }
                           }
                         }
