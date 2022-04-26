@@ -32,24 +32,13 @@ jobs:
       - uses: actions/github-script@v6
         with:
           script: |
-          
-            github.paginate(github.rest.pulls.list, {
-              owner: context.repo.owner,
-              repo: context.repo.repo
-            }).then(pulls => {
-              console.log(pulls)
-            })
-            
-            const fetch = require('node-fetch')
 
+            const fetch = require('node-fetch')
             let data = {
-                username: "iOS",
-                icon_emoji: ":ios:",
-                text: "test"
+                text: "123"
             };
-            console.log(JSON.stringify(data));
-            
-            fetch("https://hooks.slack.com/services/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", {
+          
+            fetch("https://hooks.slack.com/services/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", {
               method: "POST",
               body: JSON.parse(JSON.stringify(data)),
               headers: {'Content-Type': 'application/json'}
