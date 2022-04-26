@@ -36,25 +36,23 @@ jobs:
             const query = `query($owner:String!, $name:String!) {
               repository(owner:$owner, name:$name){
                 pullRequests(last: 100, states: [OPEN]) {
-                  edges {
-                    node {
-                      author {
-                        login
-                      }
-                      isDraft
-                      permalink
-                      number
-                      mergeable
-                      milestone {
-                        title
-                      }
-                      reviewRequests(last: 10) {
-                        nodes {
-                          requestedReviewer {
-                            __typename
-                            ... on User {
-                              login
-                            }
+                  nodes {
+                    author {
+                      login
+                    }
+                    isDraft
+                    permalink
+                    number
+                    mergeable
+                    milestone {
+                      title
+                    }
+                    reviewRequests(last: 10) {
+                      nodes {
+                        requestedReviewer {
+                          __typename
+                          ... on User {
+                            login
                           }
                         }
                       }
