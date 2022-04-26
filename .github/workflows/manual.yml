@@ -67,7 +67,22 @@ jobs:
             }
             const result = await github.graphql(query, variables)
 
-            
-            
-            console.log(result.repository.pullRequests.nodes)
+            let text = ""
+            result.repository.pullRequests.nodes
+              .filter(function(pull) {
+                  return pull.milestone && pull.milestone.title == milestone && pull.isDraft == false
+              })
+              .forEach(function(pull) {
+                  let pullText = `\nPR: <${pull.permalink}|${pull.number}>`
+                  if (pull.reviewRequests.nodes.length > 0) {
+                      
+                      pullText += ", reviewer: "
+                  } else {
+                      pullText += ", reviewer: @app-ios"
+                  }
+                  pull.reviewRequests.nodes.forEach(function(r) {
+                      pullText += `${r.login} ,`;
+                  })
+                  text += pullText
+              })
 
