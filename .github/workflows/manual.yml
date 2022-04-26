@@ -34,25 +34,11 @@ jobs:
           script: |
             const query = `query($owner:String!, $name:String!) {
               repository(owner:$owner, name:$name){
-                pullRequests(last: 10) {
+                pullRequests(states: OPEN) {
                   edges {
                     node {
                       number
                       mergeable
-                      milestone {
-
-                      }
-                      reviewRequests {
-                        edges {
-                          node {
-                            requestedReviewer {
-                            }
-                          }
-                        }
-                      }
-                      reviews {
-                        author
-                      }
                     }
                   }
                 }
