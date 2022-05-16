@@ -12,8 +12,6 @@ on:
         description: 'The milestone you wanna filter'
         # Input has to be provided for the workflow to run
         required: false
-  schedule:
-    - cron: '*/5 * * * 1-5'
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
