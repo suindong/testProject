@@ -13,7 +13,7 @@ on:
         # Input has to be provided for the workflow to run
         required: false
   schedule:
-    - cron: '40 2 * * 1-5' # UTC time, JP time is 11:00 am
+    - cron: '5/5 * * * 1-5' # UTC time, JP time is 11:00 am
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -35,65 +35,11 @@ jobs:
         with:
           script: |
             let milestone = context.payload.inputs.milestone
-            const query = `query($owner:String!, $name:String!) {
-              repository(owner:$owner, name:$name){
-                pullRequests(last: 100, states: [OPEN]) {
-                  nodes {
-                    author {
-                      login
-                    }
-                    isDraft
-                    permalink
-                    number
-                    mergeable
-                    milestone {
-                      title
-                    }
-                    reviewRequests(last: 10) {
-                      nodes {
-                        requestedReviewer {
-                          __typename
-                          ... on User {
-                            login
-                          }
-                        }
-                      }
-                    }
-                    reviews(last: 10) {
-                      nodes {
-                        state
-                        author {
-                          login
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }`;
-            const variables = {
-              owner: context.repo.owner,
-              name: context.repo.repo
+            console.log("aaa")
+            let milestone = context.payload.inputs.milestone
+            console.log("bbb")
+            if (milestone == null) {
+             console.log("ccc")
+              milestone = "2.0"
             }
-            const result = await github.graphql(query, variables)
-
-            let text = ""
-            result.repository.pullRequests.nodes
-              .filter(function(pull) {
-                  return pull.milestone && pull.milestone.title == milestone && pull.isDraft == false
-              })
-              .forEach(function(pull) {
-                  let pullText = `\nPR: <${pull.permalink}|${pull.number}>`
-                  if (pull.reviewRequests.nodes.length > 0) {
-                      
-                      pullText += ", reviewer: "
-                  } else {
-                      pullText += ", reviewer: @app-ios"
-                  }
-                  pull.reviewRequests.nodes.forEach(function(r) {
-                      pullText += `${r.login} ,`;
-                  })
-                  text += pullText
-              })
-
-            console.log(text)
+            console.log(milestone)
