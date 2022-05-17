@@ -36,8 +36,6 @@ jobs:
           script: |
             let milestone = context.payload.inputs.milestone
             console.log("aaa")
-            let milestone = context.payload.inputs.milestone
-            console.log("bbb")
             if (milestone == null) {
              console.log("ccc")
               milestone = "2.0"
